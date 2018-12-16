@@ -1,9 +1,13 @@
-FROM tomcat:7-jre8
+FROM openjdk:8-jre
 
 MAINTAINER juliens@microsoft.com
 
-COPY drop/* /usr/local/tomcat/webapps/
+RUN mkdir -p /usr/local/app
+
+WORKDIR /usr/local/app
+
+COPY drop/* /usr/local/app/
 
 EXPOSE 8080
 
-ENTRYPOINT catalina.sh run
+ENTRYPOINT sh run.sh
